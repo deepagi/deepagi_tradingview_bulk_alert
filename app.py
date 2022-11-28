@@ -1,22 +1,11 @@
 import time
-import re
-import io
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
-from selenium_stealth import stealth
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
 
-import bs4
-from bs4 import BeautifulSoup
-import requests
 import pandas as pd
-import csv
 
 df = pd.read_csv('data.csv')
 
@@ -76,7 +65,7 @@ for x in df.index:
     driver.page_source
     if driver.find_element(By.XPATH,'/html/body/div[3]/div[6]/div/div[2]/div/div/div/div/div[2]'):
         driver.find_element(By.XPATH,'/html/body/div[3]/div[6]/div/div[2]/div/div/div/div/div[2]').click()
-    
+
     time.sleep(2)
     driver.page_source
     if driver.find_element(By.XPATH,'/html/body/div[3]/div[6]/div/div[1]/div[1]/div[2]/div[1]/div[1]/div/div[2]/div[1]'):
@@ -91,17 +80,17 @@ for x in df.index:
     driver.page_source
     if driver.find_element(By.XPATH,'//*[@id="overlap-manager-root"]/div/div/div[2]/div[1]/div/div/p/form/fieldset/div[2]/span/span/span[2]/span/span/span[5]/span'):
         driver.find_element(By.XPATH,'//*[@id="overlap-manager-root"]/div/div/div[2]/div[1]/div/div/p/form/fieldset/div[2]/span/span/span[2]/span/span/span[5]/span').click()
-        
+
     elem = driver.find_element(By.NAME,"band-additional")
     elem.send_keys([Keys.BACKSPACE] * 1000)
     print(elem.get_attribute("value"))
     elem.send_keys(df['ep'][x])
-        
+
     time.sleep(1)
     driver.page_source
     if driver.find_element(By.XPATH,'//*[@id="overlap-manager-root"]/div/div/div[3]/div[2]'):
         driver.find_element(By.XPATH,'//*[@id="overlap-manager-root"]/div/div/div[3]/div[2]').click()
-        
+
     time.sleep(1)
     driver.page_source
     if driver.find_element(By.XPATH,'/html/body/div[3]/div[6]/div/div[2]/div/div/div/div/div[2]'):
